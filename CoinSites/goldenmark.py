@@ -2,6 +2,7 @@ from selenium import webdriver
 from selenium.common import ElementNotVisibleException, ElementNotSelectableException
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.wait import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
 import pandas as pd
 import re
 
@@ -9,29 +10,32 @@ import re
 ## url = https://goldenmark.com/pl/982-srebro-lokacyjne/s-2/waga-1_uncja?order=product.price.asc
 
 def extract_price_from_information(information, price):
-    value = re.findall(r'\b\d+\b',information)
+    value = re.findall('[0-9]+',information)
     priceReal = re.findall(r'\b\d+\b',price.replace(' ',''))
     return float(int(priceReal[0])/int(value[0]))
+
 def goldenmark_main():
     url = "https://goldenmark.com/pl/982-srebro-lokacyjne/s-2/waga-1_uncja?order=product.price.asc"
 
     driver = webdriver.Chrome()
     driver.get(url)
-    driver.implicitly_wait(2)
+
+    wait = WebDriverWait(driver, 2)
     coinsGridSelector = 'div.product > article:not(article.sold-out) > div > div.product-description'
-    coinItems = driver.find_elements(by=By.CSS_SELECTOR, value=coinsGridSelector)
+    coinItems = WebDriverWait(driver, 5).until(
+        EC.presence_of_all_elements_located((By.CSS_SELECTOR, coinsGridSelector)))
 
-    driver.implicitly_wait(2)
     results = []
-    for item in coinItems:
-        driver.implicitly_wait(1)
+    for i, item in enumerate(coinItems):
         driver.execute_script("arguments[0].scrollIntoView();", item)
-        name = item.find_element(by=By.CSS_SELECTOR, value=' h2 >a').text
-        price = item.find_element(by=By.CSS_SELECTOR, value='div.product-price-and-shipping >span').text
-        sellPrice = price
+        name = wait.until(EC.visibility_of(item.find_element(by=By.CSS_SELECTOR, value="h2>a"))).text
+        price = wait.until(EC.visibility_of(item.find_element(by=By.CSS_SELECTOR, value="div.product-price-and-shipping >span"))).text
+        sellPrice = price.replace('zł','').replace(',', ".")
         if 'Zestaw:' in name:
-            sellPrice = extract_price_from_information(name, price)
-
+            try:
+                sellPrice = extract_price_from_information(name, price)
+            except Exception as e:
+                print(e, f'during:{name}')
 
         buyPriceItems = None
 
