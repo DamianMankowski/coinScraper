@@ -44,7 +44,7 @@ def flyingatom_main():
                   }
         results.append(result)
 
-    df = pd.DataFrame.from_records(results, index=False)
+    df = pd.DataFrame.from_records(results)
     return df
 
 
