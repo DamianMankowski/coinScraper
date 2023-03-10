@@ -15,13 +15,6 @@ def flyingatom_main():
 
     driver = webdriver.Chrome()
     driver.get(url)
-    driver.implicitly_wait(2)
-
-    # addButtonSelector = 'form > div:nth-child(1) > a'
-    # submit_button = driver.find_element(by=By.CSS_SELECTOR, value=addButtonSelector)
-    # submit_button.click()
-
-    # driver.implicitly_wait(5)
 
     coinsGridSelector = '#js-product-list > div.products.product-thumbs.row > div > article >a >div>div:nth-child(2)>div:nth-child(2)'
     coinItems = driver.find_elements(by=By.CSS_SELECTOR, value=coinsGridSelector)
@@ -32,7 +25,6 @@ def flyingatom_main():
         sell = item.find_element(by=By.CSS_SELECTOR, value='div.product-price-and-shipping>span:nth-child(2)').text
         buy = item.find_element(by=By.CSS_SELECTOR, value='div:nth-child(5) > span').text
 
-        # print(len(prices))
 
         sellPrice = re.findall(r'\b\d+\b',sell)
         buyPrice = re.findall(r'\b\d+\b',buy)

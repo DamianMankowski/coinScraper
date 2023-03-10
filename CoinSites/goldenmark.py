@@ -53,3 +53,7 @@ def goldenmark_main():
 if __name__ == '__main__':
     dane = goldenmark_main()
     print(dane)
+
+
+def goldon_main():
+    return None

@@ -13,9 +13,6 @@ from selenium.webdriver.support import expected_conditions as EC
 def tavex_main():
     url = "https://tavex.pl/srebro/srebrne-monety-bulionowe/page/1/?meta%5B0%5D=tax-silver%3Asrebrne-monety-bulionowe&sorting=price_asc"
 
-    # options = webdriver.ChromeOptions()
-    # options.add_extension('./extension/extension_5_4_1_0.crx')
-
     driver = webdriver.Chrome()
     driver.get(url)
     driver.implicitly_wait(2)
@@ -33,7 +30,6 @@ def tavex_main():
     results = []
     for i, item in enumerate(coinItems):
         information = wait.until(EC.visibility_of(item.find_element(by=By.CSS_SELECTOR, value="div.product__meta")))
-        # information = item.find_element(by=By.CSS_SELECTOR, value='div.product__meta')
         name = information.find_element(by=By.CSS_SELECTOR, value = 'div > h3 > span').text
         try:
             prices = item.find_elements(by=By.CSS_SELECTOR, value='div.product__prices > div')
