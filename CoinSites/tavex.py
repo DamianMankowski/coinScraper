@@ -53,7 +53,8 @@ def tavex_main():
         driver.implicitly_wait(2)
         result = {'Sprzedaż':sellPrice,
                    'Kupno':buyPrice,
-                  'Nazwa':name
+                  'Nazwa':name,
+                  'Strona':url,
                    }
         results.append(result)
 

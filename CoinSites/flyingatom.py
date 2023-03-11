@@ -32,8 +32,9 @@ def flyingatom_main():
 
         result = {'Sprzedaż':sellPrice[0],
                    'Kupno':buyPrice[0],
-                  'Nazwa': name
-                  }
+                  'Nazwa': name,
+                  'Strona':url,
+                   }
         results.append(result)
 
     df = pd.DataFrame.from_records(results)

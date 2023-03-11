@@ -42,7 +42,8 @@ def goldenmark_main():
         driver.implicitly_wait(2)
         result = {'Sprzedaż':sellPrice,
                    'Kupno':buyPriceItems,
-                  'Nazwa':name
+                  'Nazwa':name,
+                  'Strona':url,
                    }
         results.append(result)
 

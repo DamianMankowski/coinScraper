@@ -30,7 +30,8 @@ def mennica_gdanska_main():
         buyPrice = None
         result = {'Sprzedaż':price,
                    'Kupno':buyPrice,
-                  'Nazwa':name
+                  'Nazwa':name,
+                  'Strona':url,
                    }
         results.append(result)
 
