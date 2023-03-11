@@ -11,6 +11,17 @@ from CoinSites.goldon import goldon_main
 from CoinSites.guldener import guldener_main
 from CoinSites.mennica_gdanska import mennica_gdanska_main
 from CoinSites.mennica_mazovia import mennica_mazovia_main
+from CoinSites.mennicaskarbowa import mennicaskarbowa_main
+from CoinSites.metalmarket import metalmarket_main
+from CoinSites.srebnamennica import srebnamennica_main
+from CoinSites.szlachetneinwestycje import szlachetneinwestycje_main
+
+from CoinSites.element79 import element79_main
+from CoinSites.spotprice import spotprice_main
+from CoinSites.numizmatyczny import numizmatyczny_main
+
+
+
 import datetime
 
 
@@ -33,7 +44,23 @@ def main():
 
     df_mennica_mazovia = mennica_mazovia_main()
 
-    frames=[df_tavex, df_chojnackikwiecien, df_flyingatom, df_goldenmark, df_goldon,  df_guldener, df_mennica_gdanska, df_mennica_mazovia]
+    df_mennicaskarbowa = mennicaskarbowa_main()
+
+    df_metalmarket = metalmarket_main()
+
+    df_srebnamennica = srebnamennica_main()
+
+    df_szlachetneinwestycje = szlachetneinwestycje_main()
+
+    df_element79 = element79_main()
+
+    df_spotprice = spotprice_main()
+
+    df_numizmatyczny = numizmatyczny_main()
+
+    frames=[df_tavex, df_chojnackikwiecien, df_flyingatom, df_goldenmark, df_goldon,  df_guldener, df_mennica_gdanska,
+            df_mennica_mazovia, df_mennicaskarbowa, df_metalmarket, df_srebnamennica, df_szlachetneinwestycje,
+            df_element79, df_spotprice, df_numizmatyczny]
 
     result = pd.concat(frames)
     print(result)
