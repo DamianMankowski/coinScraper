@@ -3,14 +3,16 @@ from typing import List
 import os
 from selenium import webdriver
 import pandas as pd
+
+from CoinSites.mennicakapitalowa import mennicakapitalowa_main
 from CoinSites.tavex import tavex_main
 from CoinSites.chojnackikwiecien import chojnackikwiecien_main
 from CoinSites.flyingatom import flyingatom_main
 from CoinSites.goldenmark import goldenmark_main
 from CoinSites.goldon import goldon_main
 from CoinSites.guldener import guldener_main
-from CoinSites.mennica_gdanska import mennica_gdanska_main
-from CoinSites.mennica_mazovia import mennica_mazovia_main
+from CoinSites.mennicagdanska import mennica_gdanska_main
+from CoinSites.mennicamazovia import mennica_mazovia_main
 from CoinSites.mennicaskarbowa import mennicaskarbowa_main
 from CoinSites.metalmarket import metalmarket_main
 from CoinSites.srebnamennica import srebnamennica_main
@@ -58,9 +60,11 @@ def main():
 
     df_numizmatyczny = numizmatyczny_main()
 
+    df_mennicakapitalowa = mennicakapitalowa_main()
+
     frames=[df_tavex, df_chojnackikwiecien, df_flyingatom, df_goldenmark, df_goldon,  df_guldener, df_mennica_gdanska,
             df_mennica_mazovia, df_mennicaskarbowa, df_metalmarket, df_srebnamennica, df_szlachetneinwestycje,
-            df_element79, df_spotprice, df_numizmatyczny]
+            df_element79, df_spotprice, df_numizmatyczny, df_mennicakapitalowa]
 
     result = pd.concat(frames)
     print(result)
